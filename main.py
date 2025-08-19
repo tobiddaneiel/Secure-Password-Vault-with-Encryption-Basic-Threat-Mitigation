@@ -1,10 +1,10 @@
 # main.py
-from vault.cli import main
+from vault.cli import main_cli
 from getpass import getpass
 from vault import storage
 
 def main():
-    master_passsword = getpass("Enter the master password to unlock the vault:  ")
+    master_password = getpass("Enter the master password to unlock the vault:  ")
     
     try:
         #Load and decrypt vault from disk to memory
