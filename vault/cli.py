@@ -1,5 +1,4 @@
 # vault/cli.py
-from getpass import getpass
 from typing import Dict
 from . import storage
 
@@ -33,17 +32,11 @@ def list_services(vault: Dict[str, dict]):
     for s in sorted(vault.keys()):
         print(f" - {s}")
 
-def main():
-    # Unlock
-    master = getpass("Set or enter master password: ")
-
-    # Load (decrypt if Day 3+, or read plaintext if Day 2 file exists)
-    try:
-        vault = storage.load_vault(master)
-    except ValueError:
-        print("❌ Wrong password or corrupted file.")
-        return
-
+def main_cli(vault: Dict[str, dict], master_password: str):
+    """
+    Main CLI loop. All operations happen on the in-memory vault.
+    Save writes encrypted data back to disk.
+    """
     while True:
         show_menu()
         choice = input("Choose: ").strip()
@@ -54,7 +47,7 @@ def main():
         elif choice == "3":
             list_services(vault)
         elif choice == "4":
-            storage.save_vault(vault, master)
+            storage.save_vault(vault, master_password)  # encrypt before writing
             print("🔒 Saved (encrypted). Bye!")
             break
         else:
