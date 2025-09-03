@@ -47,12 +47,13 @@ This project is a simple yet secure password vault application that enables user
    cd password-vault
 
 2. Set up environment
+   ```bash
    python -m venv venv
    venv\Scripts\activate    # Windows
    source venv/bin/activate # macOS/Linux
    pip install -r requirements.txt
    
-3. Run the vault
+4. Run the vault
    python main.py
 
 
