@@ -45,3 +45,35 @@ This project is a simple yet secure password vault application that enables user
    ```bash
    git clone https://github.com/yourusername/password-vault.git
    cd password-vault
+
+2. Set up environment
+   python -m venv venv
+   venv\Scripts\activate    # Windows
+   source venv/bin/activate # macOS/Linux
+   pip install -r requirements.txt
+   
+3. Run the vault
+   python main.py
+
+
+### Features available so far
+- Add credentials (via CLI)
+- Retrieve credentials (via CLI)
+- Encryption: AES-256 with PBKDF2/bcrypt key derivation
+- Security logging: Failed attempts logged in failed_attempts.log
+- Account lock: After 3 failed master password attempts
+
+### Security Measures
+- AES-256 encryption: Credentials are never stored in plain text.
+- Master password: Required to unlock the vault; never written to disk.
+- In-memory decryption: Data is only decrypted temporarily while in use.
+- PBKDF2/bcrypt key derivation: Protects against brute force attacks.
+- Security logging: Failed login attempts are logged with timestamps.
+- Account lock: Prevents unlimited brute force attempts.
+
+### Limitations
+- Single-user design: No multi-user access at this stage.
+- Lost master password: Cannot be recovered; all data becomes inaccessible.
+- Basic CLI interface: No GUI yet.
+- JSON storage: Suitable for small-scale usage but not optimized for large datasets.
+- Logging not encrypted: Failed attempts log file is stored in plain text.
